@@ -30,6 +30,7 @@ fs.stat(rout, function(err, stat) {
     const files = fs.readdirSync(rout);
     console.log('El directorio existe:'.green, rout);
     console.log('Archivos en el directorio:'.blue, files);
+    
     // convertir ruta a absoluta
     console.log('Ruta absoluta: '.yellow, path.resolve(rout));
 
