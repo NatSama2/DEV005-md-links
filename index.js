@@ -2,7 +2,7 @@ const { existsSync }  = require('node:fs');
 const fs = require('fs');
 const path = require('path');
 const colors = require('colors');
-const { log } = require('node:console');
+//const { log } = require('node:console');
 
 const welcomeContent = fs.readFileSync('welcome.md', 'utf-8').cyan;
 console.log(welcomeContent);
@@ -26,8 +26,9 @@ fs.readFile('Pruebas/prueba.txt','utf8', (err, data) => {
 //const rout = 'C:/Users/Natalie/Desktop/[ Nat ]/Laboratoria/3er Proyecto/DEV005-data-lovers';
 //const rout = 'C:/Users/Natalie/Desktop/[ Nat ]/Documentos';
 //const rout = 'C:/Users/Natalie/Desktop/Documentoss';
-const rout = '/Users/Natalie/Desktop/[ Nat ]/Laboratoria';
+//const rout = '/Users/Natalie/Desktop/[ Nat ]/Laboratoria';
 //const rout = 'Pruebas/prueba.txt';
+const rout = 'Pruebas';
  
 // Validar si la ruta existe
 if (fs.existsSync(rout)) {
@@ -62,12 +63,8 @@ if (fs.existsSync(rout)) {
       } else {
         const elements = fs.readdirSync(route);
         elements.forEach((element) => {
-          let newRoute = path.join(route, element);
-          if (fs.statSync(newRoute).isDirectory()) {
+          let newRoute = path.join(route, element);         
             arrayMd = arrayMd.concat(recursive(newRoute));
-          } else {
-            arrayMd.push(newRoute);
-          }
         });
       }
       return arrayMd.filter((file) => path.extname(file) === '.md');
@@ -82,7 +79,6 @@ if (fs.existsSync(rout)) {
 } else {
   console.log('La ruta no existe :c'.red);
 }
-
 
 }, 3000);
 
