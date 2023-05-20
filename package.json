@@ -6,12 +6,15 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "eslint": "^8.40.0",
+    "eslint-plugin-jest": "^27.2.1",
     "jsdom": "^22.0.0",
     "markdown-it": "^13.0.1",
     "terminal-image": "^2.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
     "jest": "^29.5.0"
   },
   "scripts": {
