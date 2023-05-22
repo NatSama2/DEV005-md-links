@@ -1,26 +1,32 @@
 const fs = require('fs');
+const { readMd, recursive } = require('./Paths');
+// const path = require('path');
+const route = process.argv[2];
 
-// Leer archivo
-const readMD = (file) => new Promise((resolve, reject) => {
-  fs.readFile(file, 'utf8', (err, data) => {
-    if (err) reject(err);
-    resolve(data);
+const mdLinks = (route) => new Promise((resolve, reject) => {
+  Promise.all(recursive(route).map((file) => readMd(file)))
+    .then((results) => {
+      const arrObjMd = [].concat(...results);
+      resolve(arrObjMd);
+    })
+    .catch((error) => {
+      console.log(':c', error);
+      reject(error);
+    });
+});
+
+mdLinks(route)
+  .then((res) => {
+    console.log('Links', res);
+  })
+  .catch((err) => {
+    console.log('err', err);
   });
-});
 
-const readMDs = (files) => Promise.all(files.map((file) => readMD(file)));
-
-/* const mdLinks = (path, options) => {
-  return new Promise((resolve, reject) => {
-
-});
+/* module.exports = {
+  /mdLinks,
+  readMd,
 }; */
-
-module.exports = {
-  // mdLinks,
-  readMD,
-  readMDs,
-};
 
 /* if (!path.isAbsolute(file)) {
     toAbsolute(file);
