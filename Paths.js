@@ -54,6 +54,31 @@ const getLinks = (files, data) => {
   return allLinks;
 };
 
+// Verificar el estado de los enlaces
+const statusLinks = (links) => {
+  links.forEach((link) => {
+    fetch(link.href)
+      .then((response) => {
+        if (response.ok) {
+          console.log('Link:'.cyan, link.href);
+          console.log('Text:'.cyan, link.text);
+          console.log('Status:'.cyan, response.status);
+          // eslint-disable-next-line prefer-template
+          console.log('Status Text:'.cyan, response.statusText + '\n');
+        } else {
+          console.log('Link:'.red, link.href);
+          console.log('Text:'.red, link.text);
+          console.log('Status:'.red, response.status);
+          // eslint-disable-next-line prefer-template
+          console.log('Status Text:'.red, response.statusText + '\n');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  });
+};
+
 // Leer archivo
 const readMd = (fileMd) => new Promise((resolve, reject) => {
   fs.readFile(fileMd, 'utf8', (err, data) => {
@@ -61,39 +86,10 @@ const readMd = (fileMd) => new Promise((resolve, reject) => {
       reject(err);
     } else {
       resolve(getLinks(fileMd, data));
+      statusLinks(getLinks(fileMd, data));
     }
   });
 });
-
-// Verificar el estado de los enlaces
-/* const statusLinks = () => {
-  const links = getLinks(route);
-  links.forEach((link) => {
-    fetch(link.href)
-      .then((response) => {
-        console.log('Link:', link.href);
-        console.log('Text:', link.text);
-        console.log('Status:', response.status);
-        console.log('Status Text:', response.statusText);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  });
-};
-statusLinks(); */
-const statusLinks = () => {
-  fetch('https://github.com/NatSama2')
-    .then((response) => {
-      console.log('Link:'.cyan, response.url);
-      console.log('Status:'.cyan, response.status);
-      console.log('Status Text:'.cyan, response.statusText);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-};
-statusLinks();
 
 module.exports = {
   recursive,
