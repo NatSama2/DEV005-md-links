@@ -5,7 +5,7 @@ const path = require('path');
 const colors = require('colors');
 const markdownIt = require('markdown-it');
 const { JSDOM } = require('jsdom');
-const { readMD, readMDs } = require('./Md-Links.js');
+const { readMD, readMDs } = require('./Md-Links');
 
 const welcomeContent = fs.readFileSync('welcome.md', 'utf-8').cyan;
 console.log(welcomeContent);
@@ -25,6 +25,7 @@ setTimeout(() => {
   const getLinks = (files) => {
     const allLinks = [];
     files.forEach((e) => {
+      // eslint-disable-next-line new-cap
       const md = new markdownIt();
       const content = md.render(e);
       const dom = new JSDOM(content);

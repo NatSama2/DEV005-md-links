@@ -1,10 +1,11 @@
-const fs = require('fs');
-const { readMd, recursive } = require('./Paths');
+// const fs = require('fs');
 // const path = require('path');
+const { readMd, recursive } = require('./Paths');
+
 const route = process.argv[2];
 
-const mdLinks = (route) => new Promise((resolve, reject) => {
-  Promise.all(recursive(route).map((file) => readMd(file)))
+const mdLinks = (path) => new Promise((resolve, reject) => {
+  Promise.all(recursive(path).map((file) => readMd(file)))
     .then((results) => {
       const arrObjMd = [].concat(...results);
       resolve(arrObjMd);
@@ -17,7 +18,7 @@ const mdLinks = (route) => new Promise((resolve, reject) => {
 
 mdLinks(route)
   .then((res) => {
-    console.log('Links', res);
+    console.log('Links leídos de los archivos Md:'.yellow, res);
   })
   .catch((err) => {
     console.log('err', err);
