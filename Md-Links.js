@@ -1,8 +1,6 @@
 // const fs = require('fs');
 // const path = require('path');
-const { readMd, recursive } = require('./Paths');
-
-const route = process.argv[2];
+const { readMd, recursive, route } = require('./Paths');
 
 const mdLinks = (path) => new Promise((resolve, reject) => {
   Promise.all(recursive(path).map((file) => readMd(file)))

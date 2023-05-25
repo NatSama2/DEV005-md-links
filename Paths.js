@@ -4,25 +4,26 @@ const path = require('path');
 const colors = require('colors');
 const MarkdownIt = require('markdown-it');
 const { JSDOM } = require('jsdom');
+const { argv } = require('node:process');
 
-const route = process.argv[2];
-const isFile = (route1) => fs.statSync(route1).isFile();
+const route = argv[2];
+const isFiles = (route1) => fs.statSync(route1).isFile();
 const dir = (route2) => fs.readdirSync(route2);
 const isDirectory = (route3) => fs.lstatSync(route3).isDirectory();
 
 // Validar si la ruta existe y transformar en absoluta
 const validatePath = (rout) => {
-  if (fs.existsSync(rout)) {
+  if (rout && fs.existsSync(rout)) {
     return path.resolve(rout);
   }
   return undefined;
 };
-// console.log(validatePath(route));
+console.log('Ruta absoluta'.yellow, validatePath(route));
 
 // Función recursiva
 const recursive = (ruta) => {
   let arrayMd = [];
-  if (isFile(ruta)) {
+  if (isFiles(ruta)) {
     arrayMd.push(ruta);
   } else if (isDirectory(ruta)) {
     const elements = dir(ruta);
@@ -95,4 +96,10 @@ module.exports = {
   recursive,
   readMd,
   getLinks,
+  isFiles,
+  dir,
+  isDirectory,
+  validatePath,
+  statusLinks,
+  route,
 };
