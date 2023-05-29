@@ -18,7 +18,7 @@ const validatePath = (rout) => {
   }
   return undefined;
 };
-console.log('Ruta absoluta'.yellow, validatePath(route));
+// console.log('Ruta absoluta'.yellow, validatePath(route));
 
 // Función recursiva
 const recursive = (ruta) => {
@@ -34,7 +34,7 @@ const recursive = (ruta) => {
   }
   return arrayMd.filter((file) => path.extname(file) === '.md');
 };
-console.log('Lista de archivos con extensión .md:'.blue, recursive(validatePath(route)));
+// console.log('Lista de archivos con extensión .md:'.blue, recursive(validatePath(route)));
 
 // obtener links
 const getLinks = (files, data) => {
@@ -56,29 +56,26 @@ const getLinks = (files, data) => {
 };
 
 // Verificar el estado de los enlaces
-const statusLinks = (links) => {
-  links.forEach((link) => {
-    fetch(link.href)
-      .then((response) => {
-        if (response.ok) {
-          console.log('Link:'.cyan, link.href);
-          console.log('Text:'.cyan, link.text);
-          console.log('Status:'.cyan, response.status);
-          // eslint-disable-next-line prefer-template
-          console.log('Status Text:'.cyan, response.statusText + '\n');
-        } else {
-          console.log('Link:'.red, link.href);
-          console.log('Text:'.red, link.text);
-          console.log('Status:'.red, response.status);
-          // eslint-disable-next-line prefer-template
-          console.log('Status Text:'.red, response.statusText + '\n');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
+const validateLinks = (links) => Promise.all(links.map((link) => fetch(link.href)
+  .then((response) => {
+    if (response.ok) {
+      return ({
+        Link: link.href,
+        Text: link.text,
+        Status: response.status,
+        StatusText: response.statusText,
       });
-  });
-};
+    }
+    return ({
+      Link: link.href,
+      Text: link.text,
+      Status: response.status,
+      StatusText: response.statusText,
+    });
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  })));
 
 // Leer archivo
 const readMd = (fileMd) => new Promise((resolve, reject) => {
@@ -87,7 +84,7 @@ const readMd = (fileMd) => new Promise((resolve, reject) => {
       reject(err);
     } else {
       resolve(getLinks(fileMd, data));
-      statusLinks(getLinks(fileMd, data));
+      validateLinks(getLinks(fileMd, data));
     }
   });
 });
@@ -100,6 +97,6 @@ module.exports = {
   dir,
   isDirectory,
   validatePath,
-  statusLinks,
+  validateLinks,
   route,
 };
