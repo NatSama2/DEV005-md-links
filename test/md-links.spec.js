@@ -1,6 +1,9 @@
 const {
   isFiles, dir, isDirectory, validatePath, recursive, getLinks, validateLinks, readMd,
 } = require('../Paths');
+const {
+  mdLinks,
+} = require('../Md-Links');
 
 jest.mock('node:process', () => ({
   argv: ['', '', 'Pruebas'],
@@ -31,4 +34,13 @@ describe('Path function', () => {
   it('readMd should be a function', () => {
     expect(typeof readMd).toBe('function');
   });
+});
+
+describe('Md-Links function', () => {
+  it('mdLinks should be a function', () => {
+    expect(typeof mdLinks).toBe('function');
+  });
+/*   it('mdLinks should return a promise', () => {
+    expect(mdLinks).toBeInstanceOf(Promise);
+  }); */
 });

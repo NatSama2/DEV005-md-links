@@ -77,6 +77,23 @@ const validateLinks = (links) => Promise.all(links.map((link) => fetch(link.href
     console.error('Error:', error);
   })));
 
+const statsLinks = (links, stats = false) => {
+  const totalLinks = links.length;
+  const uniqueLinks = new Set(links.map((zelda) => zelda.href));
+  const countUniqueLinks = uniqueLinks.size;
+  const brokenLinks = links.filter((result) => result.StatusText === 'Not Found').length;
+  if (stats) {
+    return ({
+      Total: totalLinks,
+      Unique: countUniqueLinks,
+      Broken: brokenLinks,
+    });
+  } return ({
+    Total: totalLinks,
+    Unique: countUniqueLinks,
+  });
+};
+
 // Leer archivo
 const readMd = (fileMd) => new Promise((resolve, reject) => {
   fs.readFile(fileMd, 'utf8', (err, data) => {
@@ -98,5 +115,6 @@ module.exports = {
   isDirectory,
   validatePath,
   validateLinks,
+  statsLinks,
   route,
 };
