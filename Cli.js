@@ -1,3 +1,4 @@
+const colors = require('colors');
 const {
   mdLinks, route,
 } = require('./Md-Links');
@@ -20,18 +21,33 @@ if (option1 === undefined && option2 === undefined) {
 
 if (option1 === '--validate' && option2 === undefined) {
   mdLinks(route, { validate: true })
-    .then((res) => {
-      console.log('Validación de Links:'.cyan, res);
+    .then((links) => {
+      console.log(`${'Validación de Links:'.yellow}\n`);
+      links.forEach((link) => {
+        if (link.StatusText === 'OK') {
+          console.log(colors.cyan('Link:'), link.Link);
+          console.log(colors.cyan('Text:'), link.Text);
+          // console.log(colors.cyan('File:'), link.file);
+          console.log(colors.cyan('Status:'), link.Status);
+          console.log(colors.cyan('StatusText:'), `${link.StatusText}\n`);
+        } else {
+          console.log(colors.red('Link:'), link.Link);
+          console.log(colors.red('Text:'), link.Text);
+          // console.log(colors.red('File:'), link.file);
+          console.log(colors.red('Status:'), link.Status);
+          console.log(colors.red('StatusText:'), `${link.StatusText}\n`);
+        }
+      });
     })
     .catch((err) => {
-      console.log('err', err);
+      console.log('Error:', err);
     });
 }
 
 if (option1 === '--stats' && option2 === undefined) {
   mdLinks(route, { validate: false })
     .then((res) => {
-      console.log('Estadísticas básicas de los Links'.cyan, statsLinks(res));
+      console.log(`${'Estadísticas básicas de los Links:'.cyan}\n`, statsLinks(res));
     })
     .catch((err) => {
       console.log('err', err);
@@ -41,7 +57,7 @@ if (option1 === '--stats' && option2 === undefined) {
 if ((option1 === '--stats' && option2 === '--validate') || (option1 === '--validate' && option2 === '--stats')) {
   mdLinks(route, { validate: true })
     .then((res) => {
-      console.log('Estadísticas de la válidación de los Links'.cyan, statsLinks(res, true));
+      console.log(`${'Estadísticas de la válidación de los Links:'.cyan}\n`, statsLinks(res, true));
     })
     .catch((err) => {
       console.log('err', err);

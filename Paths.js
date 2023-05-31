@@ -49,7 +49,7 @@ const getLinks = (files, data) => {
     const href = link.getAttribute('href');
     const text = link.textContent;
     if (href.startsWith('https')) {
-      allLinks.push({ href, text, files });
+      allLinks.push({ href, text, file: files });
     }
   });
   return allLinks;
@@ -62,6 +62,7 @@ const validateLinks = (links) => Promise.all(links.map((link) => fetch(link.href
       return ({
         Link: link.href,
         Text: link.text,
+        File: link.file,
         Status: response.status,
         StatusText: response.statusText,
       });
@@ -69,6 +70,7 @@ const validateLinks = (links) => Promise.all(links.map((link) => fetch(link.href
     return ({
       Link: link.href,
       Text: link.text,
+      File: link.file,
       Status: response.status,
       StatusText: response.statusText,
     });
