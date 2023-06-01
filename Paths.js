@@ -79,21 +79,16 @@ const validateLinks = (links) => Promise.all(links.map((link) => fetch(link.href
     console.error('Error:', error);
   })));
 
-const statsLinks = (links, stats = false) => {
+const statsLinks = (links) => {
   const totalLinks = links.length;
-  const uniqueLinks = new Set(links.map((zelda) => zelda.href));
-  const countUniqueLinks = uniqueLinks.size;
-  const brokenLinks = links.filter((result) => result.StatusText === 'Not Found').length;
-  if (stats) {
-    return ({
-      Total: totalLinks,
-      Unique: countUniqueLinks,
-      Broken: brokenLinks,
-    });
-  } return ({
-    Total: totalLinks,
-    Unique: countUniqueLinks,
-  });
+  const prueba = links.map((element) => element.href);
+  const uniqueLinks = new Set(prueba).size;
+  return (`Total: ${totalLinks} Unique: ${uniqueLinks}`);
+};
+
+const broken = (link) => {
+  const brokenLinksCount = link.filter((result) => result.Status !== 'OK');
+  return brokenLinksCount;
 };
 
 // Leer archivo
@@ -118,5 +113,6 @@ module.exports = {
   validatePath,
   validateLinks,
   statsLinks,
+  broken,
   route,
 };

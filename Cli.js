@@ -1,10 +1,11 @@
+#!/usr/bin/env node
 const fs = require('fs');
 const colors = require('colors');
 const {
   mdLinks, route,
 } = require('./Md-Links');
 const {
-  statsLinks,
+  statsLinks, broken,
 } = require('./Paths');
 
 const welcomeContent = fs.readFileSync('welcome.md', 'utf-8').cyan;
@@ -62,9 +63,12 @@ setTimeout(() => {
   }
 
   if ((option1 === '--stats' && option2 === '--validate') || (option1 === '--validate' && option2 === '--stats')) {
-    mdLinks(route, { validate: true })
+    mdLinks(route, { validate: false })
       .then((res) => {
-        console.log(`${'Estadísticas de la válidación de los Links:'.gray}\n`, statsLinks(res, true));
+        // console.log(`${'Estadísticas de la válidación de los Links:'.gray}\n`, statsLinks(res, true));
+        const a = statsLinks(res);
+        console.log(`${'Estadísticas de la válidación de los Links:'.gray}\n`);
+        console.log(`${a} Broken: ${broken.length}`);
       })
       .catch((err) => {
         console.log('err', err);

@@ -1,7 +1,10 @@
 {
-  "name": "md-links",
+  "name": "md-links-natsama",
+  "description": "Biblioteca que permite buscar archivos Md y validar Links",
+  "main": "./Cli.js",
+  "author": "@NatSama2",
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "./Cli.js"
   },
   "version": "0.1.0",
   "engines": {
