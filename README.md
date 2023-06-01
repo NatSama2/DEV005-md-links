@@ -18,11 +18,11 @@ Se trata de una herramienta de línea de comandos (CLI) y una biblioteca que per
 
 ## Diagrama de flujo
 
-![Diagrama](Img\diagrama.png)
+![Diagrama](Img/diagrama.png)
 
 ## Diagrama del Cli
 
-![Diagrama Cli](Img\diagrama-cli.png)
+![Diagrama Cli](Img/diagrama-cli.png)
 
 
 ## 1. Instalación
