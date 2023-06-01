@@ -81,7 +81,7 @@ Este comando solo retornará número total de links encontrados en el archivo y 
 `Total: 3 , Unique: 3`
 
 
-### y fialmene:
+### y finalmente:
 
 ```sh
 md-links <ruta_de_archivo_o_directorio> [--validate] [--stats]
