@@ -47,7 +47,7 @@ const getLinks = (files, data) => {
 
   links.forEach((link) => {
     const href = link.getAttribute('href');
-    const text = link.textContent;
+    const text = link.textContent.slice(0, 50);
     if (href.startsWith('https')) {
       allLinks.push({ href, text, file: files });
     }
