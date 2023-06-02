@@ -10,14 +10,22 @@
 █▄▄█─█░░▀░░┬░░▀░░█─█▄▄█
 ```
 
-## Resumen del proyecto
+## Índice
+
+* [1. Resumen del proyecto](#1-Resumen-del-proyecto)
+* [2. Diagrama de flujo](#2-Diagrama-de-flujo)
+* [3. Instalación](#3-Instalación)
+* [4. Modo de uso](#4-Modo-de-uso)
+
+
+## 1. Resumen del proyecto
 
 Este proyecto consiste en una biblioteca diseñada especialmente para programadores, que les permite verificar si un archivo de tipo MD contiene enlaces y determinar el estado de dichos enlaces (si están funcionando o no).
 
 Se trata de una herramienta de línea de comandos (CLI) y una biblioteca que permite buscar y analizar enlaces en archivos `Markdown (.md)`. La biblioteca está desarrollada en `Node.js` y utiliza la API de Fetch para realizar solicitudes HTTP y validar los enlaces. Además, se incluyen pruebas unitarias con Jest para asegurar la calidad del código. La instalación de esta biblioteca es sencilla, ya que se puede realizar fácilmente a través de npm.
 
 
-## Diagrama de flujo
+## 2. Diagrama de flujo
 
 ![Diagrama](Img/diagrama.png)
 
@@ -26,14 +34,14 @@ Se trata de una herramienta de línea de comandos (CLI) y una biblioteca que per
 ![Diagrama Cli](Img/diagrama-cli.png)
 
 
-## 1. Instalación
+## 3. Instalación
 
 Se instala con el siguiente comando: 
 
 `npm i md-links-natsama`
 
 
-## 2. Modo de uso
+## 4. Modo de uso
 
 Desde tu terminal utliza el siguiente comando:
 
