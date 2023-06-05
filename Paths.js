@@ -37,7 +37,7 @@ const recursive = (ruta) => {
 // console.log('Lista de archivos con extensión .md:'.blue, recursive(validatePath(route)));
 
 // obtener links
-const getLinks = (files, data) => {
+const getLinks = (file, data) => {
   const allLinks = [];
   const md = new MarkdownIt();
   const content = md.render(data);
@@ -49,7 +49,7 @@ const getLinks = (files, data) => {
     const href = link.getAttribute('href');
     const text = link.textContent.slice(0, 50);
     if (href.startsWith('https')) {
-      allLinks.push({ href, text, file: files });
+      allLinks.push({ href, text, file });
     }
   });
   return allLinks;
@@ -83,7 +83,7 @@ const statsLinks = (links) => {
   const totalLinks = links.length;
   const prueba = links.map((element) => element.href);
   const uniqueLinks = new Set(prueba).size;
-  return (`Total: ${totalLinks} Unique: ${uniqueLinks}`);
+  return (`Total: ${totalLinks}\nUnique: ${uniqueLinks} \n`);
 };
 
 const broken = (link) => {
@@ -98,7 +98,7 @@ const readMd = (fileMd) => new Promise((resolve, reject) => {
       reject(err);
     } else {
       resolve(getLinks(fileMd, data));
-      validateLinks(getLinks(fileMd, data));
+      // validateLinks(getLinks(fileMd, data));
     }
   });
 });

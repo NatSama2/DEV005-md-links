@@ -24,6 +24,9 @@ setTimeout(() => {
           console.log(`${colors.green('Texto:')} ${link.text}`);
           console.log(`${colors.green('File:')} ${link.file}\n`);
         });
+      })
+      .catch((err) => {
+        console.log('Error:', err.message);
       });
   }
 
@@ -48,7 +51,7 @@ setTimeout(() => {
         });
       })
       .catch((err) => {
-        console.log('Error:', err);
+        console.log('Error:', err.message);
       });
   }
 
@@ -58,7 +61,7 @@ setTimeout(() => {
         console.log(`${'Estadísticas básicas de los Links:'.green}\n`, statsLinks(res));
       })
       .catch((err) => {
-        console.log('err', err);
+        console.log('err', err.message);
       });
   }
 
@@ -67,11 +70,11 @@ setTimeout(() => {
       .then((res) => {
         // console.log(`${'Estadísticas de la válidación de los Links:'.gray}\n`, statsLinks(res, true));
         const a = statsLinks(res);
-        console.log(`${'Estadísticas de la válidación de los Links:'.gray}\n`);
-        console.log(`${a} Broken: ${broken.length}`);
+        console.log(`${'Estadísticas de la válidación de los Links:'.green}`);
+        console.log(`${a}Broken: ${broken.length}`);
       })
       .catch((err) => {
-        console.log('err', err);
+        console.log('err', err.message);
       });
   }
 }, 3000);

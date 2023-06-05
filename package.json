@@ -6,7 +6,7 @@
   "bin": {
     "md-links": "./Cli.js"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "engines": {
     "node": ">=16.x"
   },
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "eslint": "eslint --ext .js"
+    "eslint": "eslint --ext .js test/"
   },
 "jest": {
   "collectCoverage": true,

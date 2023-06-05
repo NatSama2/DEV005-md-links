@@ -6,7 +6,7 @@ const {
 } = require('../Md-Links');
 
 jest.mock('node:process', () => ({
-  argv: ['', '', 'Pruebas'],
+  argv: ['', '', 'Pruebasssssss'],
 }));
 
 describe('Path function', () => {
